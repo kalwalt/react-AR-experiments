@@ -57,6 +57,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
       <div></div>
       )
 ```
+## Final notes
+
+One important thing: resources (patterns, images, video...) must be in the public folder.
 
 ## Available Scripts
 
