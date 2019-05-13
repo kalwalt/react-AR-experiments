@@ -1,8 +1,65 @@
+# React AR experiments
+
+Some experiments with [THREEAR.js](https://github.com/JamesMilnerUK/THREEAR), [React.js](https://reactjs.org/) and [Three.js](https://threejs.org/).
+In a Future i will add other examples tests...
+
+For now you can find the [react-threear-example](https://github.com/kalwalt/react-AR-experiments/tree/master/react-threear-example) a simple example to show the THREEAR lib in action with React.js.
+This is the basic setup to start a project with the two libs.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Steps to start a project from scratch
+
+1. Start a project with the create React app with the command:
+
+    `npx create-react-app your-project-name`
+
+2. Install Three.js and THEEAR.js with npm
+
+    `npm install three threear`
+
+3. Check if in package.json are installed the two libs.
+4. In App.js import the two libs (with const require)
+5. In the render() method of the App Component inject THREE renderer and camera into the THREEAR.source:
+    `var source = new THREEAR.Source({ renderer, camera });`
+6. Initialize the tracking process:
+
+```javascript
+      THREEAR.initialize({ source: source }).then((controller) => {
+          /* Three.js code here (mesh, materials... to be attached to the marker)*/
+          var path = './data/patt.hiro';
+          var patternMarker = new THREEAR.PatternMarker({
+      					patternUrl: path,
+      					markerObject: markerGroup
+      				});
+    	    controller.trackMarker(patternMarker);
+      )};
+```
+7. Remember to update the controller in the `requestAnimationFrame`:
+
+```javascript
+        requestAnimationFrame(function animate(nowMsec){
+        // measure time
+        // your measure time code here
+        renderer.render( scene, camera );
+        controller.update( source.domElement );
+
+        // keep looping
+        requestAnimationFrame( animate );
+        });
+
+```
+8. In return() create a simple div:
+
+```javascript
+      return(
+      <div></div>
+      )
+```
 
 ## Available Scripts
 
-In the project directory, you can run:
+In every project directory, you can run:
 
 ### `npm start`
 
