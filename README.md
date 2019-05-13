@@ -20,7 +20,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 3. Check if in package.json are installed the two libs.
 4. In App.js import the two libs (with const require)
-5. In the render() method of the App Component inject THREE renderer and camera into the THREEAR.source:
+5. In the `render()` method of the App Component inject THREE renderer and camera into the `THREEAR.source()`:
+
     `var source = new THREEAR.Source({ renderer, camera });`
 6. Initialize the tracking process:
 
@@ -49,7 +50,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
         });
 
 ```
-8. In return() create a simple div:
+8. In `return()` create a simple div:
 
 ```javascript
       return(
