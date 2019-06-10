@@ -1,14 +1,18 @@
 # React AR experiments
 
-Some experiments with [THREEAR.js](https://github.com/JamesMilnerUK/THREEAR), [React.js](https://reactjs.org/) and [Three.js](https://threejs.org/).
+Some experiments with [Ar.js](https://github.com/jeromeetienne/AR.js), [THREEAR.js](https://github.com/JamesMilnerUK/THREEAR), [React.js](https://reactjs.org/) and [Three.js](https://threejs.org/).
 In a Future i will add other examples tests...
 
-For now you can find the [react-threear-example](https://github.com/kalwalt/react-AR-experiments/tree/master/react-threear-example) a simple example to show the THREEAR lib in action with React.js.
+You can find the [react-threear-example](https://github.com/kalwalt/react-AR-experiments/tree/master/react-threear-example) a simple example to show the THREEAR lib in action with React.js.
 This is the basic setup to start a project with the two libs.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Steps to start a project from scratch
+There is also the basic [AR.js and React example](https://github.com/kalwalt/react-AR-experiments/react-aframe-ar) as discussed in this [issue](https://github.com/jeromeetienne/AR.js/issues/493#issue)
+
+
+
+## Steps to start a project from scratch with THREEAR and React
 
 1. Start a project with the create React app with the command:
 
