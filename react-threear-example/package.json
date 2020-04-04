@@ -10,7 +10,7 @@
     "react-scripts": "3.0.1",
     "serialize-javascript": "^3.0.0",
     "three": "^0.104.0",
-    "threear": "^1.0.0-alpha.4"
+    "threear": "^1.0.0-alpha.5"
   },
   "scripts": {
     "start": "react-scripts start",
