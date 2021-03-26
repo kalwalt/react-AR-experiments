@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "acorn": "^7.1.1",
+    "acorn": "^8.1.0",
     "kind-of": "^6.0.3",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "^3.4.4",
-    "serialize-javascript": "^3.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^4.0.3",
+    "serialize-javascript": "^5.0.1",
     "three": "^0.126.1",
     "threear": "^1.0.0-alpha.5"
   },
