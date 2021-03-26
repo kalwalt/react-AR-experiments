@@ -9,7 +9,7 @@
     "react-dom": "^16.8.6",
     "react-scripts": "^3.4.4",
     "serialize-javascript": "^3.0.0",
-    "three": "^0.125.0",
+    "three": "^0.126.1",
     "threear": "^1.0.0-alpha.5"
   },
   "scripts": {
