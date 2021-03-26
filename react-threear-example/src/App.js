@@ -44,7 +44,7 @@ class App extends React.Component {
 
     requestAnimationFrame(function animate(nowMsec){
         // measure time
-				lastTimeMsec = lastTimeMsec || nowMsec-1000/60;
+				var lastTimeMsec = lastTimeMsec || nowMsec-1000/60;
 				var deltaMsec = Math.min(200, nowMsec - lastTimeMsec);
 				lastTimeMsec = nowMsec;
 	      renderer.render( scene, camera );
