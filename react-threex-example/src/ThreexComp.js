@@ -1,7 +1,6 @@
 import React from 'react'
 import { ArToolkitProfile, ArToolkitSource, ArToolkitContext, ArMarkerControls} from 'arjs/three.js/build/ar-threex.js';
 import * as THREE from 'three';
-//import ARToolkit from 'artoolkit5-js'
 
 export default class ThreexComp extends React.Component {
 
@@ -144,9 +143,9 @@ export default class ThreexComp extends React.Component {
     render() {
         return (
         <div 
-        style={{ width: "800px", height: "800px" }}
-        ref={mount => { this.mount = mount}}
-        />)
-      }
-          
+            style={{ width: "800px", height: "800px" }}
+            ref={mount => { this.mount = mount}}
+        />
+        )
+    }       
 }
