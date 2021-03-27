@@ -7,7 +7,9 @@ export default class ThreexComp extends React.Component {
 
     constructor(props){
         super(props)
+    }
 
+    componentDidMount() {
         ArToolkitContext.baseURL = './'
         // init renderer
 	    var renderer	= new THREE.WebGLRenderer({
@@ -125,7 +127,6 @@ export default class ThreexComp extends React.Component {
 
         // run the rendering loop
 	    var lastTimeMsec= null
-        // this make freeze the app...
 	    requestAnimationFrame(function animate(nowMsec){
 		    // keep looping
 		    requestAnimationFrame( animate );
@@ -141,12 +142,11 @@ export default class ThreexComp extends React.Component {
     }
 
     render() {
-
-        return(
-            <div></div>
-        );
-
-    }
-        
-    
+        return (
+        <div 
+        style={{ width: "800px", height: "800px" }}
+        ref={mount => { this.mount = mount}}
+        />)
+      }
+          
 }
