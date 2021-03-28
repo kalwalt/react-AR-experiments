@@ -4,10 +4,6 @@ import * as THREE from 'three';
 
 export default class ThreexComp extends React.Component {
 
-    constructor(props){
-        super(props)
-    }
-
     componentDidMount() {
         ArToolkitContext.baseURL = './'
         // init renderer
@@ -122,6 +118,13 @@ export default class ThreexComp extends React.Component {
 
 	    onRenderFcts.push(function(delta){
 		    mesh.rotation.x += delta * Math.PI
+	    })
+
+        //////////////////////////////////////////////////////////////////////////////////
+	    //		render the whole thing on the page
+	    //////////////////////////////////////////////////////////////////////////////////
+	    onRenderFcts.push(function(){
+		    renderer.render( scene, camera );
 	    })
 
         // run the rendering loop
