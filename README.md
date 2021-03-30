@@ -10,7 +10,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 There is also the basic [AR.js and React example](https://github.com/kalwalt/react-AR-experiments/react-aframe-ar) as discussed in this [issue](https://github.com/jeromeetienne/AR.js/issues/493#issue)
 
+## AR.js with ES6 and React
 
+This is a **AR.js** feature under development. You can test an example with **THREEx** API in the react-threex-example folder.
 
 ## Steps to start a project from scratch with THREEAR and React
 
