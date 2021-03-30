@@ -2324,9 +2324,9 @@ arity-n@^1.0.4:
   resolved "https://registry.yarnpkg.com/arity-n/-/arity-n-1.0.4.tgz#d9e76b11733e08569c0847ae7b39b2860b30b745"
   integrity sha1-2edrEXM+CFacCEeuezmyhgswt0U=
 
-"arjs@https://github.com/AR-js-org/AR.js.git#1d3032ce4f62849e7237e5453650f6fdb733a192":
-  version "3.0.2"
-  resolved "https://github.com/AR-js-org/AR.js.git#1d3032ce4f62849e7237e5453650f6fdb733a192"
+"arjs@https://github.com/AR-js-org/AR.js.git#595a5c1c7020d3dd46f7082f63b5b7cca6d376e3":
+  version "3.1.0"
+  resolved "https://github.com/AR-js-org/AR.js.git#595a5c1c7020d3dd46f7082f63b5b7cca6d376e3"
   dependencies:
     aframe "^1.0.4"
     artoolkit5-js "^0.0.4"

@@ -12,7 +12,7 @@
     "aframe-react": "^4.4.0",
     "babel-polyfill": "^6.3.14",
     "web-vitals": "^1.0.1",
-    "arjs": "https://github.com/AR-js-org/AR.js.git#1d3032ce4f62849e7237e5453650f6fdb733a192"
+    "arjs": "https://github.com/AR-js-org/AR.js.git#595a5c1c7020d3dd46f7082f63b5b7cca6d376e3"
   },
   "scripts": {
     "start": "react-scripts start",
