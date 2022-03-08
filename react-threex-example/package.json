@@ -10,7 +10,7 @@
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1",
-    "arjs": "https://github.com/AR-js-org/AR.js.git#595a5c1c7020d3dd46f7082f63b5b7cca6d376e3"
+    "@ar-js-org/ar.js": "^3.4.0-alpha-rc1"
   },
   "scripts": {
     "start": "react-scripts start",

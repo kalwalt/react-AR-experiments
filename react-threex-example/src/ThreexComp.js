@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArToolkitProfile, ArToolkitSource, ArToolkitContext, ArMarkerControls} from 'arjs/three.js/build/ar-threex.js';
+import { ArToolkitProfile, ArToolkitSource, ArToolkitContext, ArMarkerControls} from '@ar-js-org/ar.js/three.js/build/ar-threex.js';
 import * as THREE from 'three';
 
 export default class ThreexComp extends React.Component {
@@ -13,7 +13,7 @@ export default class ThreexComp extends React.Component {
 	    });
 	    renderer.setClearColor(new THREE.Color('lightgrey'), 0)
 	    // renderer.setPixelRatio( 2 );
-	    renderer.setSize( window.innerWidth, window.innerHeight );
+	    renderer.setSize(640, 480);
 	    renderer.domElement.style.position = 'absolute'
 	    renderer.domElement.style.top = '0px'
 	    renderer.domElement.style.left = '0px'
@@ -21,6 +21,7 @@ export default class ThreexComp extends React.Component {
 
 	    // array of functions for the rendering loop
 	    var onRenderFcts= [];
+		var arToolkitContext, arMarkerControls;
 
 	    // init scene and camera
 	    var scene	= new THREE.Scene();
@@ -38,6 +39,7 @@ export default class ThreexComp extends React.Component {
 	    const arToolkitSource = new ArToolkitSource(artoolkitProfile.sourceParameters)
 
         arToolkitSource.init(function onReady(){
+			initARContext();
 		    onResize()
 	    })
 
@@ -53,51 +55,81 @@ export default class ThreexComp extends React.Component {
 		    }
 	    }
 
-        ////////////////////////////////////////////////////////////////////////////////
-	    //          initialize arToolkitContext
-	    ////////////////////////////////////////////////////////////////////////////////
+		function initARContext() { // create atToolkitContext
+			arToolkitContext = new ArToolkitContext({
+				cameraParametersUrl: ArToolkitContext.baseURL + '../data/camera_para.dat',
+				detectionMode: 'mono'
+			})
+			// initialize it
+			arToolkitContext.init(() => { // copy projection matrix to camera
+				camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
 
-	    // create atToolkitContext
-	    var arToolkitContext = new ArToolkitContext({
-            cameraParametersUrl: ArToolkitContext.baseURL + 'data/camera_para.dat',
-            detectionMode: 'mono',
-        })
-    
-	    // initialize it
-	    arToolkitContext.init(function onCompleted(){
-		    // copy projection matrix to camera
-		    camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
-	    })
+				arToolkitContext.arController.orientation = getSourceOrientation();
+				arToolkitContext.arController.options.orientation = getSourceOrientation();
+
+				console.log('arToolkitContext', arToolkitContext);
+				window.arToolkitContext = arToolkitContext;
+			})
+
+			// MARKER
+			arMarkerControls = new ArMarkerControls(arToolkitContext, camera, {
+				type: 'pattern',
+				patternUrl: ArToolkitContext.baseURL + '../data/patt.hiro',
+				// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji',
+				// as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
+				changeMatrixMode: 'cameraTransformMatrix'
+			})
+
+			scene.visible = false
+
+			console.log('ArMarkerControls', arMarkerControls);
+			window.arMarkerControls = arMarkerControls;
+		}
+
+
+		function getSourceOrientation() {
+			if (!arToolkitSource) {
+				return null;
+			}
+
+			console.log(
+				'actual source dimensions',
+				arToolkitSource.domElement.videoWidth,
+				arToolkitSource.domElement.videoHeight
+			);
+
+			if (arToolkitSource.domElement.videoWidth > arToolkitSource.domElement.videoHeight) {
+				console.log('source orientation', 'landscape');
+				return 'landscape';
+			} else {
+				console.log('source orientation', 'portrait');
+				return 'portrait';
+			}
+		}
 
 	    // update artoolkit on every frame
-	    onRenderFcts.push(function(){
-		    if( arToolkitSource.ready === false )	return
+		onRenderFcts.push(function () {
+			if (!arToolkitContext || !arToolkitSource || !arToolkitSource.ready) {
+				return;
+			}
 
-		    arToolkitContext.update( arToolkitSource.domElement )
-	    })
+			arToolkitContext.update(arToolkitSource.domElement)
 
-        ////////////////////////////////////////////////////////////////////////////////
-	    //          Create a ArMarkerControls
-	    ////////////////////////////////////////////////////////////////////////////////
-
-	    var markerGroup = new THREE.Group()
-	    scene.add(markerGroup)
-
-	    var markerControls = new ArMarkerControls(arToolkitContext, markerGroup, {
-		    type : 'pattern',
-		    patternUrl : ArToolkitContext.baseURL + 'data/patt.hiro',
-	    })
+			// update scene.visible if the marker is seen
+			scene.visible = camera.visible
+		})
 
 	    //////////////////////////////////////////////////////////////////////////////////
 	    //		add an object in the scene
 	    //////////////////////////////////////////////////////////////////////////////////
 
-
+		var markerGroup = new THREE.Group()
+	    scene.add(markerGroup)
 	    var markerScene = new THREE.Scene()
 	    markerGroup.add(markerScene)
 
-	    var mesh = new THREE.AxesHelper()
-	    markerScene.add(mesh)
+	    var axes = new THREE.AxesHelper()
+	    markerScene.add(axes)
 
 	    // add a torus knot
 	    var geometry	= new THREE.BoxGeometry(1,1,1);
@@ -110,14 +142,14 @@ export default class ThreexComp extends React.Component {
 	    mesh.position.y	= geometry.parameters.height/2
 	    markerScene.add(mesh)
 
-	    var geometry	= new THREE.TorusKnotGeometry(0.3,0.1,64,16);
-	    var material	= new THREE.MeshNormalMaterial();
-	    var mesh	= new THREE.Mesh( geometry, material );
-	    mesh.position.y	= 0.5
-	    markerScene.add( mesh );
+	    var tgeometry	= new THREE.TorusKnotGeometry(0.3,0.1,64,16);
+	    var tmaterial	= new THREE.MeshNormalMaterial();
+	    var torus	= new THREE.Mesh( tgeometry, tmaterial );
+	    torus.position.y	= 0.5
+	    markerScene.add( torus );
 
 	    onRenderFcts.push(function(delta){
-		    mesh.rotation.x += delta * Math.PI
+		    torus.rotation.x += delta * Math.PI
 	    })
 
         //////////////////////////////////////////////////////////////////////////////////
